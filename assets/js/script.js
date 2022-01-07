@@ -5,16 +5,43 @@ var selectedCityInput = document.querySelector("#city-input");
 var seletcedCityBtn = document.querySelector(".btn");
 var forecast = document.querySelector("#forecast-card");
 var fiveDayContainerEl = document.querySelector(".fiveDayContainer");
-var searchHistoryContainer = document.querySelector(".searchHistory");
+var searchHistoryContainer = document.querySelector("#searchHistory");
+var listArr = []; 
+var historyArr = []
 
+//Load previous city list
+function showCityHistory(){
+    searchHistoryContainer.innerHTML = '';
+    var searchHistory = JSON.parse(localStorage.getItem('cityName'));
+    console.log(searchHistory)
 
-//Get city information from input
+    if(searchHistory){
+        var searchUL = document.createElement('ul');
+        searchHistoryContainer.append(searchUL);
+        //historyArr.push(searchHistory);
+        console.log(searchHistory)
+        
+        for (var i = 0; i > searchHistory; i++){
+            var searchLI = document.createElement('li');
+            searchLI.innerText = `${searchHistory[i]}`;
+            searchUL.append(searchLI);
+        }
+    
+        } else { 
+        return searchHistoryContainer.innerHTML = '';
+        }
+    
+}
+//Get city information from input and save to localStorage 
 var formSubmitHandler = function(event){
     event.preventDefault();
     var city = selectedCityInput.value.trim()
     if(city){
+        listArr.push(city);
+        localStorage.setItem('cityName', JSON.stringify(listArr));
         getLatLon(city);
-        city.value = "";
+        //var listArr = [];
+        //showCityHistory()
     } else {
         alert("Please enter a name of a city");
     }
@@ -40,7 +67,7 @@ function getWeather (lat, lon, city){
         console.log(data)
         
         var cityEl = document.createElement("h3");
-        var currentWeatherBadge = document.createElement("img");
+       // var currentWeatherBadge = document.createElement("img");
         var dateEl = document.createElement("h5");
         var tempEl = document.createElement("h6");
         var windEl = document.createElement("h6");
@@ -128,8 +155,8 @@ function showIndex(uvi) {
             uvBtn.classList.add("p-1", "rounded", "bg-danger", "text-white")
         }
 };
- function showSearchHistory() {
 
- }
+showCityHistory();
+
 selectedCityForm.addEventListener("submit", formSubmitHandler);
 
