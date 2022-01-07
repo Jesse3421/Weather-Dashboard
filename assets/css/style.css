@@ -1,0 +1,33 @@
+:root {
+    --primary: ;
+    --secondary: ;
+    --tertiary: ;
+}
+#header h1 {
+color: white;
+background-color: #9921e8;
+background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
+};
+
+#city-input {
+    width: 80%;
+    margin: 20px;
+};
+
+#forecast {
+    border : black;
+    border-style: solid;
+};
+
+.index-style {
+    width: 100%;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    margin: 4px, 2px;
+    border-radius: 8px;
+};
+
+p.fiveDayContainer {
+    font-size: 2rem;
+}
